@@ -36,13 +36,13 @@
     var marker = L.marker([MapEvents[0].lat, MapEvents[0].lng]).addTo(mymap);
 
     // Add a circle
-    var circle = L.circle([MapEvents[0].lat, MapEvents[0].lng], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 500
-    }).addTo(mymap);
-    circle.bindPopup(MapEvents[0].title);
+    // var circle = L.circle([MapEvents[0].lat, MapEvents[0].lng], {
+    //     color: 'red',
+    //     fillColor: '#f03',
+    //     fillOpacity: 0.5,
+    //     radius: 500
+    // }).addTo(mymap);
+    // circle.bindPopup(MapEvents[0].title);
 
 
     //Add events in the map
@@ -53,6 +53,12 @@
         marker.on('click', function(e) {
             window.location.href = MapEvents[index].source;
         });
+
+        //Hover the marker show the title
+        marker.on('mouseover', function(e) {
+            this.openPopup();
+        });
+
     }
 
 

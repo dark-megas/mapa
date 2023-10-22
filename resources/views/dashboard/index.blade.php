@@ -561,11 +561,38 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row mb-6">
+                <div class="col-lg-6 col-md-12 mb-lg-0 mb-4">
+                    <x-map MapEvents="{{ $event_map }}" ></x-map>
+                </div>
+                <div class="col-lg-6 col-md-12 mb-lg-0 mb-4">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <h6>Projects status</h6>
+                            <p class="text-sm">
+                                <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
+                                <span class="font-weight-bold">12%</span> this month
+                            </p>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="chart">
+                                <canvas id="chart-bar" class="chart-canvas" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <x-footers.auth></x-footers.auth>
         </div>
+
+        
+        
     </main>
     
-    <x-map MapEvents="{{ $event_map }}" ></x-map>
+
+
+
     <x-plugins></x-plugins>
     </div>
     @push('js')

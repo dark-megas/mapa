@@ -8,13 +8,7 @@ use App\Models\Event_map;
 
 class scraper extends Controller
 {
-    //Constructor
-    public function __construct()
-    {
-     
-    }
-
-
+ 
     //Metodo para ejecutar desde un comando de laravel (php artisan scraper:liveumap)
     public function liveumap()
     {
@@ -27,12 +21,7 @@ class scraper extends Controller
             $title = $node->filter('.title')->text();
             $data_id = $node->filter('.event')->attr('data-id');
             $data_link = $node->filter('.event')->attr('data-link');
-            // // Get link from source
-            // // <div class="top-right"><a rel="nofollow noopener" class="source-link" href="https://twitter.com/ignis_fatum/status/1716113505655324941" target="_blank"><span class="source"></span>source</a></div>
-            // $source_link = $node->filter('.top-right')->filter('a')->attr('href');
-            
-            // dd($source_link);        
-            
+                        
             $cord_crawler = $client->request('GET', $data_link);
 
             $cords = $cord_crawler->filter('script')->each(function ($node) {
@@ -72,6 +61,7 @@ class scraper extends Controller
             $event_map->lat = $cords['lat'];
             $event_map->lng = $cords['lng'];
             $event_map->source = $source;
+
             //create or update data
             $event_map->updateOrCreate(
                 ['data_id' => $data_id],
@@ -83,8 +73,6 @@ class scraper extends Controller
                     'source' => $source,
                 ]
             );
-            
-            $event_map->save();
             $data = array(
                 'title' => substr($title, 0, 15).'...',
                 'data_id' => $data_id,
