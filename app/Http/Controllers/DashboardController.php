@@ -34,9 +34,9 @@ class DashboardController extends Controller
         
         //array values to remove null values
         $event_map = array_values(array_filter($event_map));
+        $event_map = json_encode($event_map);
             
 
-        $event_map = json_encode($event_map);
 
         return view('dashboard.index',['event_map' => $event_map]);
     }

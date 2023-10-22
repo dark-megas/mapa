@@ -13,8 +13,12 @@
     // Get the map events from the component
     var MapEvents = @json($MapEvents);
 
+    //Get last position of the map events
+    var lastPosition = MapEvents.length - 1;
+    
+
     // Create the map with the events
-    var mymap = L.map('mapid').setView([MapEvents[0].lat, MapEvents[0].lng], 9);
+    var mymap = L.map('mapid').setView([MapEvents[lastPosition].lat, MapEvents[lastPosition].lng], 4);
 
     //Change the map language
     var lang = document.getElementsByTagName('html')[0].getAttribute('lang');
@@ -26,7 +30,7 @@
     // Add the tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-        maxZoom: 18,
+        maxZoom: 25,
         minZoom: 2,
         language: langMap,
 
@@ -67,8 +71,8 @@
 
     // Add a popup to the map
     var popup = L.popup()
-        .setLatLng([MapEvents[0].lat, MapEvents[0].lng])
-        .setContent(MapEvents[0].title)
+        .setLatLng([MapEvents[lastPosition].lat, MapEvents[lastPosition].lng])
+        .setContent(MapEvents[lastPosition].title)
         .openOn(mymap);
 
     

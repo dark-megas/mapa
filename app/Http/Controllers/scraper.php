@@ -22,8 +22,9 @@ class scraper extends Controller
             $data_id = $node->filter('.event')->attr('data-id');
             $data_link = $node->filter('.event')->attr('data-link');
                         
+            //Find cords from data_link
             $cord_crawler = $client->request('GET', $data_link);
-
+            //Find cords from script tag
             $cords = $cord_crawler->filter('script')->each(function ($node) {
 
                 if (strpos($node->text(), 'zoom=14') !== false) {
@@ -45,8 +46,10 @@ class scraper extends Controller
                 }
             
             });
+            //Remove empty values
             $cords = array_values(array_filter($cords))[0];
 
+            //Find source link
             $get_source = $cord_crawler->filter('.head_popup')->each(function ($node) {
                 $source = $node->filter('.source-link')->attr('href');
                 return $source;

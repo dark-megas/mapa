@@ -564,7 +564,12 @@
 
             <div class="row mb-6">
                 <div class="col-lg-6 col-md-12 mb-lg-0 mb-4">
-                    <x-map MapEvents="{{ $event_map }}" ></x-map>
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <x-map MapEvents="{{ $event_map }}" ></x-map>
+                        </div>
+                        
+                    </div>
                 </div>
                 <div class="col-lg-6 col-md-12 mb-lg-0 mb-4">
                     <div class="card">

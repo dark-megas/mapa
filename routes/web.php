@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +18,15 @@ use App\Http\Controllers\SessionsController;
 */
            
 
-Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
+Route::get('/', function () {
+	//Validate if user is logged in
+	if (Auth::check()) {
+		return redirect('dashboard');
+	}
+	return redirect('sign-in');
+});
+
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 Route::get('sign-up', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 Route::post('sign-up', [RegisterController::class, 'store'])->middleware('guest');
